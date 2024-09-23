@@ -1,6 +1,5 @@
 use std::{
-    io::{Read, Write},
-    net::{TcpStream, ToSocketAddrs},
+    fmt::Display, io::{Read, Write}, net::{TcpStream, ToSocketAddrs}
 };
 
 // python example
@@ -57,6 +56,16 @@ pub struct DataFrame {
     pub torque_x: f64,
     pub torque_y: f64,
     pub torque_z: f64,
+}
+
+impl Display for DataFrame {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        write!(
+            f,
+            "force_x: {:.5} N,\nforce_y: {:.5} N,\nforce_z: {:.5} N,\ntorque_x: {:.5} Nm,\ntorque_y: {:.5} Nm,\ntorque_z: {:.5} Nm\n",
+            self.force_x, self.force_y, self.force_z, self.torque_x, self.torque_y, self.torque_z
+        )
+    }
 }
 
 impl AtiNano25 {
